@@ -1,0 +1,8 @@
+{{outlet}}
+
+<div class="form-group">
+    {{textarea class="form-control" rows="4" type="email" value=splat placeholder="What's on your mind?"}}
+</div>
+<div class="form-group">
+    <button class="btn btn-default" {{action "newSplat" splat}}>Post it</button>
+</div>

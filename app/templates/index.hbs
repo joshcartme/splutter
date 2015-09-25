@@ -1,0 +1,18 @@
+<div class="text-center">    
+    <h2 id="title">Why be concise when you can splutter!</h2>
+
+    {{#unless model}}
+    <p>No splats yet</p>
+    {{/unless}}
+
+    {{#if session.isAuthenticated}}
+    <hr>
+    {{#link-to "splats"}}Write one!{{/link-to}}
+    {{/if}}
+
+    {{#if model}}
+    <hr>
+    {{/if}}
+
+    {{splat-list model=model}}
+</div>

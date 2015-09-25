@@ -1,3 +1,26 @@
-<h2 id="title">Welcome to Ember</h2>
-
-{{outlet}}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <p class="pull-right">
+            {{#if session.isAuthenticated}}
+                <img title="{{session.currentUser.email}}" alt='{{session.currentUser.email}}' class="img-circle" src="{{session.currentUser.profileImageURL}}">
+                <button class="btn btn-default" {{action "signOut"}}>Sign out</button>
+            {{else}}
+                 <div class="form-group">
+                    {{input class="form-control" type="email" value=email placeholder="Email"}}
+                    {{input class="form-control" type="password" value=password placeholder="Password"}}
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-default" {{action "signIn" "password" email password}}>Sign in</button>
+                    <button class="btn btn-default" {{action "signUp" email password}}>Sign up</button>
+                </div>
+            {{/if}}
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-md-push-3">
+            {{outlet}}
+        </div>
+    </div>
+</div>

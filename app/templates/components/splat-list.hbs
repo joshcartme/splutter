@@ -1,0 +1,5 @@
+{{#each splats as |splat|}}
+    {{#display-splat class="panel panel-default" user=splat.user timestamp=splat.timestamp}}
+    <p>{{splat.content}}</p>
+    {{/display-splat}}
+{{/each}}
