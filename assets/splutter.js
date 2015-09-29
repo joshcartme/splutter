@@ -53,8 +53,8 @@ define('splutter/components/splat-list', ['exports', 'ember'], function (exports
 
     exports['default'] = Ember['default'].Component.extend({
         model: [],
-        splats: Ember['default'].computed('model.[]', function () {
-            return this.get('model').toArray().reverse();
+        splats: Ember['default'].computed('model.splats.[]', function () {
+            return this.get('model.splats').toArray().reverse();
         })
     });
 
@@ -225,9 +225,11 @@ define('splutter/routes/application', ['exports', 'ember'], function (exports, E
     },
 
     model: function model() {
-      console.log('store', this.store);
-      return this.store.findAll('splat').then(function (splats) {
-        return splats;
+      return Ember['default'].RSVP.hash({
+        splats: this.store.findAll('splat').then(function (splats) {
+          return splats;
+        }),
+        points: [{ x: 15, y: 5 }, { x: 95, y: 65 }, { x: 45, y: 75 }, { x: 15, y: 45 }, { x: 55, y: 25 }]
       });
     },
 
@@ -633,7 +635,7 @@ define('splutter/templates/application', ['exports'], function (exports) {
         var el3 = dom.createTextNode("\n        ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("div");
-        dom.setAttribute(el3,"class","col-md-6 col-md-push-3 col-sm-8 col-sm-push-2");
+        dom.setAttribute(el3,"class","col-md-6 col-md-push-3 col-sm-8 col-sm-push-2 text-center");
         var el4 = dom.createTextNode("\n            ");
         dom.appendChild(el3, el4);
         var el4 = dom.createComment("");
@@ -889,11 +891,11 @@ define('splutter/templates/index', ['exports'], function (exports) {
             "source": null,
             "start": {
               "line": 4,
-              "column": 4
+              "column": 0
             },
             "end": {
               "line": 6,
-              "column": 4
+              "column": 0
             }
           },
           "moduleName": "splutter/templates/index.hbs"
@@ -903,8 +905,6 @@ define('splutter/templates/index', ['exports'], function (exports) {
         hasRendered: false,
         buildFragment: function buildFragment(dom) {
           var el0 = dom.createDocumentFragment();
-          var el1 = dom.createTextNode("    ");
-          dom.appendChild(el0, el1);
           var el1 = dom.createElement("p");
           var el2 = dom.createTextNode("No splats yet");
           dom.appendChild(el1, el2);
@@ -930,11 +930,11 @@ define('splutter/templates/index', ['exports'], function (exports) {
               "source": null,
               "start": {
                 "line": 10,
-                "column": 4
+                "column": 0
               },
               "end": {
                 "line": 10,
-                "column": 35
+                "column": 31
               }
             },
             "moduleName": "splutter/templates/index.hbs"
@@ -963,11 +963,11 @@ define('splutter/templates/index', ['exports'], function (exports) {
             "source": null,
             "start": {
               "line": 8,
-              "column": 4
+              "column": 0
             },
             "end": {
               "line": 11,
-              "column": 4
+              "column": 0
             }
           },
           "moduleName": "splutter/templates/index.hbs"
@@ -977,11 +977,9 @@ define('splutter/templates/index', ['exports'], function (exports) {
         hasRendered: false,
         buildFragment: function buildFragment(dom) {
           var el0 = dom.createDocumentFragment();
-          var el1 = dom.createTextNode("    ");
-          dom.appendChild(el0, el1);
           var el1 = dom.createElement("hr");
           dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode("\n    ");
+          var el1 = dom.createTextNode("\n");
           dom.appendChild(el0, el1);
           var el1 = dom.createComment("");
           dom.appendChild(el0, el1);
@@ -991,17 +989,64 @@ define('splutter/templates/index', ['exports'], function (exports) {
         },
         buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
           var morphs = new Array(1);
-          morphs[0] = dom.createMorphAt(fragment,3,3,contextualElement);
+          morphs[0] = dom.createMorphAt(fragment,2,2,contextualElement);
           return morphs;
         },
         statements: [
-          ["block","link-to",["splats"],[],0,null,["loc",[null,[10,4],[10,47]]]]
+          ["block","link-to",["splats"],[],0,null,["loc",[null,[10,0],[10,43]]]]
         ],
         locals: [],
         templates: [child0]
       };
     }());
     var child2 = (function() {
+      var child0 = (function() {
+        return {
+          meta: {
+            "revision": "Ember@1.13.7",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 16,
+                "column": 0
+              },
+              "end": {
+                "line": 18,
+                "column": 0
+              }
+            },
+            "moduleName": "splutter/templates/index.hbs"
+          },
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("    ");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createElement("circle");
+            dom.setAttribute(el1,"r","2");
+            dom.setAttribute(el1,"fill","black");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+            var element0 = dom.childAt(fragment, [1]);
+            var morphs = new Array(2);
+            morphs[0] = dom.createAttrMorph(element0, 'cx');
+            morphs[1] = dom.createAttrMorph(element0, 'cy');
+            return morphs;
+          },
+          statements: [
+            ["attribute","cx",["get","x",["loc",[null,[17,17],[17,18]]]]],
+            ["attribute","cy",["get","y",["loc",[null,[17,26],[17,27]]]]]
+          ],
+          locals: [],
+          templates: []
+        };
+      }());
       return {
         meta: {
           "revision": "Ember@1.13.7",
@@ -1009,11 +1054,11 @@ define('splutter/templates/index', ['exports'], function (exports) {
             "source": null,
             "start": {
               "line": 13,
-              "column": 4
+              "column": 0
             },
             "end": {
-              "line": 15,
-              "column": 4
+              "line": 21,
+              "column": 0
             }
           },
           "moduleName": "splutter/templates/index.hbs"
@@ -1023,20 +1068,40 @@ define('splutter/templates/index', ['exports'], function (exports) {
         hasRendered: false,
         buildFragment: function buildFragment(dom) {
           var el0 = dom.createDocumentFragment();
-          var el1 = dom.createTextNode("    ");
+          var el1 = dom.createElement("h3");
+          var el2 = dom.createTextNode("An svg");
+          dom.appendChild(el1, el2);
           dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          dom.setNamespace("http://www.w3.org/2000/svg");
+          var el1 = dom.createElement("svg");
+          dom.setAttribute(el1,"width","100");
+          dom.setAttribute(el1,"height","100");
+          var el2 = dom.createTextNode("\n");
+          dom.appendChild(el1, el2);
+          var el2 = dom.createComment("");
+          dom.appendChild(el1, el2);
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          dom.setNamespace(null);
           var el1 = dom.createElement("hr");
           dom.appendChild(el0, el1);
           var el1 = dom.createTextNode("\n");
           dom.appendChild(el0, el1);
           return el0;
         },
-        buildRenderNodes: function buildRenderNodes() { return []; },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(1);
+          morphs[0] = dom.createMorphAt(dom.childAt(fragment, [2]),1,1);
+          return morphs;
+        },
         statements: [
-
+          ["block","each",[["get","model.points",["loc",[null,[16,8],[16,20]]]]],[],0,null,["loc",[null,[16,0],[18,9]]]]
         ],
         locals: [],
-        templates: []
+        templates: [child0]
       };
     }());
     return {
@@ -1049,7 +1114,7 @@ define('splutter/templates/index', ['exports'], function (exports) {
             "column": 0
           },
           "end": {
-            "line": 19,
+            "line": 24,
             "column": 0
           }
         },
@@ -1060,52 +1125,46 @@ define('splutter/templates/index', ['exports'], function (exports) {
       hasRendered: false,
       buildFragment: function buildFragment(dom) {
         var el0 = dom.createDocumentFragment();
-        var el1 = dom.createElement("div");
-        dom.setAttribute(el1,"class","text-center");
-        var el2 = dom.createTextNode("    \n    ");
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("h2");
+        dom.setAttribute(el1,"id","title");
+        var el2 = dom.createTextNode("Why be concise when you can splutter!");
         dom.appendChild(el1, el2);
-        var el2 = dom.createElement("h2");
-        dom.setAttribute(el2,"id","title");
-        var el3 = dom.createTextNode("Why be concise when you can splutter!");
-        dom.appendChild(el2, el3);
-        dom.appendChild(el1, el2);
-        var el2 = dom.createTextNode("\n\n");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createComment("");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createTextNode("\n");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createComment("");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createTextNode("\n");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createComment("");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createTextNode("\n    ");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createComment("");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createTextNode("\n");
-        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createComment("");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createComment("");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createComment("");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createComment("");
         dom.appendChild(el0, el1);
         var el1 = dom.createTextNode("\n");
         dom.appendChild(el0, el1);
         return el0;
       },
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-        var element0 = dom.childAt(fragment, [0]);
         var morphs = new Array(4);
-        morphs[0] = dom.createMorphAt(element0,3,3);
-        morphs[1] = dom.createMorphAt(element0,5,5);
-        morphs[2] = dom.createMorphAt(element0,7,7);
-        morphs[3] = dom.createMorphAt(element0,9,9);
+        morphs[0] = dom.createMorphAt(fragment,3,3,contextualElement);
+        morphs[1] = dom.createMorphAt(fragment,5,5,contextualElement);
+        morphs[2] = dom.createMorphAt(fragment,7,7,contextualElement);
+        morphs[3] = dom.createMorphAt(fragment,9,9,contextualElement);
         return morphs;
       },
       statements: [
-        ["block","unless",[["get","model",["loc",[null,[4,14],[4,19]]]]],[],0,null,["loc",[null,[4,4],[6,15]]]],
-        ["block","if",[["get","session.isAuthenticated",["loc",[null,[8,10],[8,33]]]]],[],1,null,["loc",[null,[8,4],[11,11]]]],
-        ["block","if",[["get","model",["loc",[null,[13,10],[13,15]]]]],[],2,null,["loc",[null,[13,4],[15,11]]]],
-        ["inline","splat-list",[],["model",["subexpr","@mut",[["get","model",["loc",[null,[17,23],[17,28]]]]],[],[]]],["loc",[null,[17,4],[17,30]]]]
+        ["block","unless",[["get","model",["loc",[null,[4,10],[4,15]]]]],[],0,null,["loc",[null,[4,0],[6,11]]]],
+        ["block","if",[["get","session.isAuthenticated",["loc",[null,[8,6],[8,29]]]]],[],1,null,["loc",[null,[8,0],[11,7]]]],
+        ["block","if",[["get","model",["loc",[null,[13,6],[13,11]]]]],[],2,null,["loc",[null,[13,0],[21,7]]]],
+        ["inline","splat-list",[],["model",["subexpr","@mut",[["get","model",["loc",[null,[23,19],[23,24]]]]],[],[]]],["loc",[null,[23,0],[23,26]]]]
       ],
       locals: [],
       templates: [child0, child1, child2]
@@ -1737,7 +1796,7 @@ define('splutter/tests/routes/application.jshint', function () {
 
   QUnit.module('JSHint - routes');
   QUnit.test('routes/application.js should pass jshint', function(assert) { 
-    assert.ok(false, 'routes/application.js should pass jshint.\nroutes/application.js: line 22, col 43, Missing semicolon.\nroutes/application.js: line 4, col 15, \'Firebase\' is not defined.\n\n2 errors'); 
+    assert.ok(false, 'routes/application.js should pass jshint.\nroutes/application.js: line 30, col 43, Missing semicolon.\nroutes/application.js: line 4, col 15, \'Firebase\' is not defined.\n\n2 errors'); 
   });
 
 });
@@ -1873,7 +1932,7 @@ catch(err) {
 if (runningTests) {
   require("splutter/tests/test-helper");
 } else {
-  require("splutter/app")["default"].create({"name":"splutter","version":"0.0.0+6943cd42"});
+  require("splutter/app")["default"].create({"name":"splutter","version":"0.0.0+70bbb730"});
 }
 
 /* jshint ignore:end */
