@@ -1932,7 +1932,7 @@ catch(err) {
 if (runningTests) {
   require("splutter/tests/test-helper");
 } else {
-  require("splutter/app")["default"].create({"name":"splutter","version":"0.0.0+eb85abba"});
+  require("splutter/app")["default"].create({"name":"splutter","version":"0.0.0+2d47b4e0"});
 }
 
 /* jshint ignore:end */
