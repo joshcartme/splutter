@@ -1,6 +1,14 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-sm-6">
+            <ul class="list-inline">
+                <li>{{#link-to "index"}}Home{{/link-to}}</li>
+                {{#if session.isAuthenticated}}
+                <li>{{#link-to "splats"}}Splats{{/link-to}}</li>
+                {{/if}}
+            </ul>
+        </div>
+        <div class="col-sm-6">
             <p class="pull-right">
             {{#if session.isAuthenticated}}
                 <img title="{{session.currentUser.email}}" alt='{{session.currentUser.email}}' class="img-circle" src="{{session.currentUser.profileImageURL}}">
@@ -19,7 +27,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6 col-md-push-3 col-sm-8 col-sm-push-2">
+        <div class="col-md-6 col-md-push-3 col-sm-8 col-sm-push-2 text-center">
             {{outlet}}
         </div>
     </div>

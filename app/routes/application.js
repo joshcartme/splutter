@@ -9,11 +9,19 @@ export default Ember.Route.extend({
   },
 
   model() {
-    console.log('store', this.store);
-    return this.store.findAll(
-      'splat'
-    ).then(function(splats){
-      return splats;
+    return Ember.RSVP.hash({
+        splats: this.store.findAll(
+          'splat'
+        ).then(function(splats){
+          return splats;
+        }),
+        points: [
+          {x: 15, y: 5},
+          {x: 95, y: 65},
+          {x: 45, y: 75},
+          {x: 15, y: 45},
+          {x: 55, y: 25}
+        ]
     });
   },
 

@@ -1,18 +1,23 @@
-<div class="text-center">    
-    <h2 id="title">Why be concise when you can splutter!</h2>
 
-    {{#unless model}}
-    <p>No splats yet</p>
-    {{/unless}}
+<h2 id="title">Why be concise when you can splutter!</h2>
 
-    {{#if session.isAuthenticated}}
-    <hr>
-    {{#link-to "splats"}}Write one!{{/link-to}}
-    {{/if}}
+{{#unless model}}
+<p>No splats yet</p>
+{{/unless}}
 
-    {{#if model}}
-    <hr>
-    {{/if}}
+{{#if session.isAuthenticated}}
+<hr>
+{{#link-to "splats"}}Write one!{{/link-to}}
+{{/if}}
 
-    {{splat-list model=model}}
-</div>
+{{#if model}}
+<h3>An svg</h3>
+<svg width="100" height="100">
+{{#each model.points}}
+    <circle cx={{x}} cy={{y}} r="2" fill="black"></circle>
+{{/each}}
+</svg>
+<hr>
+{{/if}}
+
+{{splat-list model=model}}
